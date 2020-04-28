@@ -56,7 +56,8 @@ class UsersController extends Controller {
         $data['pass'] = Hash::make($data['pass']);
         $data['register'] = time();
         
-        if (UsersModel::create($data)<0) {
+        $id = UsersModel::create($data);
+        if ($id<0) {
             return response([
                 'status' => false,
                 'message' => 'Erro desconhecido ao salvar informações.'
@@ -65,7 +66,8 @@ class UsersController extends Controller {
 
         return [
             'status' => true,
-            'message' => 'Usuário criado com sucesso!'
+            'message' => 'Usuário criado com sucesso!',
+            'id' => $id
         ];
     }
 
