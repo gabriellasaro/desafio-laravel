@@ -32,6 +32,10 @@ Route::middleware('api')->delete('/collections/{id}', 'CollectionsController@del
 
 // Modelos
 
-Route::middleware('api')->get('/collections/{collectionsID}/models', 'ModelsController@getAll')->where('collectionID', '[0-9]+');
+Route::middleware('api')->get('/collections/{collectionID}/models', 'ModelsController@getAll')->where('collectionID', '[0-9]+');
 
-Route::middleware('api')->post('/collections/{collectionsID}/models', 'ModelsController@create')->where('collectionID', '[0-9]+');
+Route::middleware('api')->post('/collections/{collectionID}/models', 'ModelsController@create')->where('collectionID', '[0-9]+');
+
+Route::middleware('api')->put('/models/{id}', 'ModelsController@update')->where('id', '[0-9]+');
+
+Route::middleware('api')->delete('/models/{id}', 'ModelsController@delete')->where('id', '[0-9]+');

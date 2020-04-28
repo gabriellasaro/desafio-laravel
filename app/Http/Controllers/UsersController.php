@@ -7,30 +7,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 use App\UsersModel;
+use App\Http\Controllers\RespController;
 
 class UsersController extends Controller {
 
     public function getUser($userID) {
-        $result = UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']);
-        if (!$result[0]) {
-            return response([
-                'status' => false,
-                'message' => 'Erro desconhecido ao obter usuário.'
-            ], 500);
-        }
-
-        if (sizeof($result[1])==0) {
-            return response([
-                'status' => false,
-                'message' => 'Usuário não encontrado.'
-            ], 404);
-        }
-
-        return array(
-            'status' => true,
-            'message' => 'Sucesso.',
-            'data' => $result[1]
-        );
+        return RespController::returnData(UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
     }
 
     public function create(Request $request) {
@@ -57,19 +39,7 @@ class UsersController extends Controller {
         $data['pass'] = Hash::make($data['pass']);
         $data['register'] = time();
         
-        $id = UsersModel::create($data);
-        if ($id<0) {
-            return response([
-                'status' => false,
-                'message' => 'Erro desconhecido ao salvar informações.'
-            ], 500);
-        }
-
-        return [
-            'status' => true,
-            'message' => 'Usuário criado com sucesso!',
-            'id' => $id
-        ];
+        return RespController::returnId(UsersModel::create($data));
     }
 
 }

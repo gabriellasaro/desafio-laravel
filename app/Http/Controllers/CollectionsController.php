@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\CollectionsModel;
+use App\Http\Controllers\RespController;
 
 class CollectionsController extends Controller {
 
@@ -18,19 +19,7 @@ class CollectionsController extends Controller {
     }
 
     public function getAll() {
-        $result = CollectionsModel::selectCollections();
-        if (!$result[0]) {
-            return response([
-                'status' => false,
-                'message' => 'Erro desconhecido ao obter dados.'
-            ], 500);
-        }
-
-        return array(
-            'status' => true,
-            'message' => 'Sucesso.',
-            'data' => $result[1]
-        );
+        return RespController::returnData(CollectionsModel::selectCollections());
     }
 
     public function create(Request $request) {
@@ -41,20 +30,7 @@ class CollectionsController extends Controller {
             ], 400);
         }
 
-        $result = CollectionsModel::create($request->all());
-
-        if ($result<0) {
-            return response([
-                'status' => false,
-                'message' => 'Erro desconhecido ao salvar informações.'
-            ], 500);
-        }
-
-        return [
-            'status' => true,
-            'message' => 'Coleção criada com sucesso!',
-            'collectionID' => $result
-        ];
+        return RespController::returnId(CollectionsModel::create($request->all()));
     }
 
     public function update(Request $request, $collectionID) {
@@ -65,37 +41,10 @@ class CollectionsController extends Controller {
             ], 400);
         }
 
-        $result = CollectionsModel::up($collectionID, $request->all());
-        if ($result==0) {
-            return response([
-                'status' => false,
-                'message' => 'Coleção não encontrada'
-            ], 404);
-        } elseif ($result<0) {
-            return response([
-                'status' => false,
-                'message' => 'Erro desconhecido ao tentar atualizar dados.'
-            ], 500);
-        }
-
-        return array(
-            'status'=>true,
-            'message'=> 'Sucesso ao atulizar.'
-        );
+        return RespController::affected(CollectionsModel::up($collectionID, $request->all()));
     }
 
     public function delete($collectionID) {
-        $result = CollectionsModel::remove($collectionID);
-        if ($result==0) {
-            return response([
-                'status' => false,
-                'message' => 'Coleção não encontrada.'
-            ], 404);
-        }
-
-        return array(
-            'status' => true,
-            'message' => 'Sucesso ao deletar.'
-        );
+        return RespController::affected(CollectionsModel::remove($collectionID));
     }
 }
