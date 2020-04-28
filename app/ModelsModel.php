@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-use App\CollectionsModel;
+use App\GenericModel;
 
 class ModelsModel extends Model {
 
     public static function selectModels($collectionID) {
-        $collection = CollectionsModel::selectCollection($collectionID);
+        $collection = GenericModel::selectEqualCondition('collection', $collectionID, ['collection.name', 'collection.description', 'collection.release_date']);
 
         if ($collection[0] && sizeof($collection[1])!=0) {
             try {

@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class RespController extends Controller {
 
+    public static function valFails() {
+        return response([
+            'status' => false,
+            'message' => 'Os dados forneciados não passaram pela validação!'
+        ], 400);
+    }
+
     public static function affected($result) {
         if ($result==0) {
             return response([
@@ -61,4 +68,5 @@ class RespController extends Controller {
             'data' => $result[1]
         ];
     }
+
 }

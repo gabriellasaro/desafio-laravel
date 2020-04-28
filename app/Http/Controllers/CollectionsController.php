@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\CollectionsModel;
 use App\GenericModel;
 use App\Http\Controllers\RespController;
 
@@ -20,7 +19,7 @@ class CollectionsController extends Controller {
     }
 
     public function getAll() {
-        return RespController::returnData(CollectionsModel::selectCollections());
+        return RespController::returnData(GenericModel::selectAll('collection'));
     }
 
     public function create(Request $request) {

@@ -39,3 +39,13 @@ Route::middleware('api')->post('/collections/{collectionID}/models', 'ModelsCont
 Route::middleware('api')->put('/models/{id}', 'ModelsController@update')->where('id', '[0-9]+');
 
 Route::middleware('api')->delete('/models/{id}', 'ModelsController@delete')->where('id', '[0-9]+');
+
+// Tarefas
+
+Route::middleware('api')->get('/tasks', 'TasksController@getAll');
+
+Route::middleware('api')->post('/tasks', 'TasksController@create');
+
+Route::middleware('api')->get('/tasks/{id}/users', 'TasksController@getUsers')->where('id', '[0-9]+');
+
+// Route::middleware('api')->get('/tasks/{id}/models', 'ModelsController@getAll')->where('id', '[0-9]+');

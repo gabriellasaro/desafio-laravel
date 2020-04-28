@@ -6,14 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-use App\UsersModel;
 use App\GenericModel;
 use App\Http\Controllers\RespController;
 
 class UsersController extends Controller {
 
     public function getUser($userID) {
-        return RespController::returnData(UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
+        return RespController::returnData(GenericModel::selectEqualCondition('user', $userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
     }
 
     public function create(Request $request) {
