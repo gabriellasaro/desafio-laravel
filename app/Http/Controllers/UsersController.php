@@ -10,7 +10,7 @@ use App\UsersModel;
 
 class UsersController extends Controller {
 
-    public function getUser(Request $request, $userID) {
+    public function getUser($userID) {
         $result = UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible']);
         
         if (sizeof($result)==0) {
