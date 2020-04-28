@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('api')->get('/users/{id}', 'UsersController@getUser')->where('id', '[0-9]+');
 
 Route::middleware('api')->post('/users', 'UsersController@create');
+
+Route::middleware('api')->get('/collections', 'CollectionsController@getAll');
+
+Route::middleware('api')->post('/collections', 'CollectionsController@create');
+
+Route::middleware('api')->put('/collections/{id}', 'CollectionsController@update')->where('id', '[0-9]+');
+
+Route::middleware('api')->delete('/collections/{id}', 'CollectionsController@delete')->where('id', '[0-9]+');
