@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\ModelsModel;
+use App\GenericModel;
 use App\Http\Controllers\RespController;
 
 class ModelsController extends Controller {
@@ -33,7 +34,7 @@ class ModelsController extends Controller {
         $data = $request->all();
         $data['collection_id'] = $collectionID;;
 
-        return RespController::returnId(ModelsModel::create($data));
+        return RespController::returnId(GenericModel::create('model', $data));
     }
 
     public function update(Request $request, $modelID) {
@@ -52,11 +53,11 @@ class ModelsController extends Controller {
             ], 400);
         }
 
-        return RespController::affected(ModelsModel::up($modelID, $request->all()));
+        return RespController::affected(GenericModel::up('model', $modelID, $request->all()));
     }
 
     public function delete($modelID) {
-        return RespController::affected(ModelsModel::remove($modelID));
+        return RespController::affected(GenericModel::remove('model', $modelID));
     }
 
 }

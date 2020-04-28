@@ -30,29 +30,5 @@ class ModelsModel extends Model {
 
         return [false];
     }
-
-    public static function create($data) {
-        try {
-            return DB::table('model')->insertGetId($data);
-        } catch(\Illuminate\Database\QueryException $ex) {
-            return -1;
-        }
-    }
-
-    public static function up($modelID, $data) {
-        try {
-            return DB::table('model')->where('id', $modelID)->update($data);
-        } catch(\Illuminate\Database\QueryException $ex) {
-            return -1;
-        }
-    }
-
-    public static function remove($modelID) {
-        try {
-            return DB::table('model')->where('id', $modelID)->delete();
-        } catch(\Illuminate\Database\QueryException $ex) {
-            return -1;
-        }
-    }
-
+    
 }

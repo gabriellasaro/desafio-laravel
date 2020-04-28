@@ -14,12 +14,5 @@ class UsersModel extends Model {
             return [false];
         }
     }
-
-    public static function create($data) {
-        try {
-            return DB::table('user')->insertGetId($data);
-        } catch(\Illuminate\Database\QueryException $ex) {
-            return -1;
-        }
-    }
+    
 }

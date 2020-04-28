@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 use App\UsersModel;
+use App\GenericModel;
 use App\Http\Controllers\RespController;
 
 class UsersController extends Controller {
@@ -39,7 +40,7 @@ class UsersController extends Controller {
         $data['pass'] = Hash::make($data['pass']);
         $data['register'] = time();
         
-        return RespController::returnId(UsersModel::create($data));
+        return RespController::returnId(GenericModel::create('user', $data));
     }
 
 }
