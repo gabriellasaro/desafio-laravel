@@ -11,7 +11,7 @@ use App\UsersModel;
 class UsersController extends Controller {
 
     public function getUser($userID) {
-        $result = UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible']);
+        $result = UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']);
         if (!$result[0]) {
             return response([
                 'status' => false,
@@ -42,7 +42,8 @@ class UsersController extends Controller {
             'pass' => 'required|string|min:8|max:250',
             'address' => 'required|string|min:3|max:600',
             'phone' => 'required|string|min:9|max:20',
-            'responsible' => 'required|string|min:3|max:100'
+            'responsible' => 'required|string|min:3|max:100',
+            'task_id' => 'required|integer|min:0|max:999999|exists:task,id'
         ]);
         
         if ($validator->fails()) {
