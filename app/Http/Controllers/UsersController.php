@@ -12,8 +12,14 @@ class UsersController extends Controller {
 
     public function getUser($userID) {
         $result = UsersModel::selectUser($userID, ['name', 'company', 'cnpj', 'phone', 'responsible']);
-        
-        if (sizeof($result)==0) {
+        if (!$result[0]) {
+            return response([
+                'status' => false,
+                'message' => 'Erro desconhecido ao obter usuário.'
+            ], 500);
+        }
+
+        if (sizeof($result[1])==0) {
             return response([
                 'status' => false,
                 'message' => 'Usuário não encontrado.'
@@ -21,8 +27,9 @@ class UsersController extends Controller {
         }
 
         return array(
-            'status'=>true,
-            'data'=>$result
+            'status' => true,
+            'message' => 'Sucesso.',
+            'data' => $result[1]
         );
     }
 
