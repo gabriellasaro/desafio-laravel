@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
+});
+
+Route::get('/dashboard/login', function() {
+    return view('sign-in/pt-BR');
 });
