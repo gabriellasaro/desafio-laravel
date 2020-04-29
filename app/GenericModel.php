@@ -22,7 +22,7 @@ class GenericModel extends Model {
             return [false];
         }
     }
-
+    
     public static function create($table, $data) {
         try {
             return DB::table($table)->insertGetId($data);

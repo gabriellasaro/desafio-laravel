@@ -49,3 +49,13 @@ Route::middleware('api')->post('/tasks', 'TasksController@create');
 Route::middleware('api')->get('/tasks/{id}/users', 'TasksController@getUsers')->where('id', '[0-9]+');
 
 // Route::middleware('api')->get('/tasks/{id}/models', 'ModelsController@getAll')->where('id', '[0-9]+');
+
+// Sessão
+
+Route::middleware('api')->post('/sessions', 'SessionsController@create');
+
+Route::middleware('checkToken:api')->get('/tologado', function(){
+    return 'to logado!';
+});
+
+Route::middleware('api')->delete('/sessions', 'SessionsController@logout');

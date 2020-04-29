@@ -24,10 +24,7 @@ class CollectionsController extends Controller {
 
     public function create(Request $request) {
         if ($this->validator($request->all())->fails()) {
-            return response([
-                'status' => false,
-                'message' => 'Os dados forneciados não passaram pela validação!'
-            ], 400);
+            return RespController::valFails();
         }
 
         return RespController::returnId(GenericModel::create('collection', $request->all()));
@@ -35,10 +32,7 @@ class CollectionsController extends Controller {
 
     public function update(Request $request, $collectionID) {
         if ($this->validator($request->all())->fails()) {
-            return response([
-                'status' => false,
-                'message' => 'Os dados forneciados não passaram pela validação!'
-            ], 400);
+            return RespController::valFails();
         }
 
         return RespController::affected(GenericModel::up('collection', $collectionID, $request->all()));

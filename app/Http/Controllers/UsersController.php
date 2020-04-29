@@ -29,10 +29,7 @@ class UsersController extends Controller {
         ]);
         
         if ($validator->fails()) {
-            return response([
-                'status' => false,
-                'message' => 'Os dados forneciados não passaram pela validação!'
-            ], 400);
+            return RespController::valFails();
         }
 
         $data = $request->all();

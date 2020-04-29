@@ -10,7 +10,9 @@ class TasksModel extends Model {
     public static function selectUsers($taskID) {
         $task = GenericModel::selectEqualCondition('task', $taskID);
 
-        if ($task[0] && sizeof($task[1])!=0) {
+        if (!$task[0]) {
+            return [false];
+        } elseif(sizeof($task[1])!=0) {
             try {
                 $users = DB::table('user')->where('task_id', $taskID)->get();
             } catch(\Illuminate\Database\QueryException $ex) {
@@ -22,11 +24,8 @@ class TasksModel extends Model {
                 'users' => $users
                 ]
             ];
-        } elseif (sizeof($task[1])==0) {
-            return [true, []];
         }
-
-        return [false];
+        return [true, []];
     }
 
 }

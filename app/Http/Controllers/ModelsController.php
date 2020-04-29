@@ -24,12 +24,7 @@ class ModelsController extends Controller {
             'code' => 'required|string|min:6|max:6|unique:model'
         ]);
 
-        if ($validator->fails()) {
-            return response([
-                'status' => false,
-                'message' => 'Os dados forneciados não passaram pela validação!'
-            ], 400);
-        }
+        if ($validator->fails()) {return RespController::valFails();}
 
         $data = $request->all();
         $data['collection_id'] = $collectionID;;
@@ -46,12 +41,7 @@ class ModelsController extends Controller {
             'code' => 'string|min:6|max:6|unique:model'
         ]);
 
-        if ($validator->fails()) {
-            return response([
-                'status' => false,
-                'message' => 'Os dados forneciados não passaram pela validação!'
-            ], 400);
-        }
+        if ($validator->fails()) {return RespController::valFails();}
 
         return RespController::affected(GenericModel::up('model', $modelID, $request->all()));
     }

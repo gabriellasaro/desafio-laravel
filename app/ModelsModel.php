@@ -12,7 +12,9 @@ class ModelsModel extends Model {
     public static function selectModels($collectionID) {
         $collection = GenericModel::selectEqualCondition('collection', $collectionID, ['collection.name', 'collection.description', 'collection.release_date']);
 
-        if ($collection[0] && sizeof($collection[1])!=0) {
+        if (!$collection[0]) {
+            return [false];
+        } elseif(sizeof($collection[1])!=0) {
             try {
                 $models = DB::table('model')->where('collection_id', $collectionID)->get();
             } catch(\Illuminate\Database\QueryException $ex) {
@@ -24,11 +26,8 @@ class ModelsModel extends Model {
                 'models' => $models
                 ]
             ];
-        } elseif (sizeof($collection[1])==0) {
-            return [true, []];
         }
-
-        return [false];
+        return [true, []];
     }
     
 }
