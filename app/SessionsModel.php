@@ -35,7 +35,7 @@ class SessionsModel extends Model {
 
                 $result = DB::table('session')->insert([
                     'id' => $token,
-                    'user_id' => '1',
+                    'user_id' => $user[1][0]->id,
                     'register' => time(),
                 ]);
 
