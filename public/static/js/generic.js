@@ -5,8 +5,21 @@ function closeAlert() {
     }
 }
 
-function getData(uri, addLocal) {    
-    fetch(uri, {method: 'get'})
+function checkToken(response) {
+    if (response.status == 401) {
+        window.location.href = "http://127.0.0.1/dashboard/login";
+        localStorage.clear();
+    } else {
+        if (response.headers.get('Meu-Token') != null) {
+            localStorage.setItem('token', response.headers.get('Meu-Token'))
+        }
+    }
+    return response
+}
+
+function getData(uri, addLocal, headers = {}) {
+    fetch(uri, {method: 'get', headers: headers})
+    .then(function(response) {return checkToken(response)})
     .then(function(response) {
         return response.json()
     })
@@ -14,7 +27,11 @@ function getData(uri, addLocal) {
         if (!data.status) {
             console.log(data);
         } else {
-            addLocal(data.data);
+            if (typeof(data.data) == 'undefined') {
+                addLocal(data);
+            } else {
+                addLocal(data.data);
+            }
         }
     })
     .catch(function(err) {
@@ -22,16 +39,15 @@ function getData(uri, addLocal) {
     });
 }
 
-function submitData(pElement, uri, localData, addLocal) {
+function submitData(pElement, uri, localData, addLocal, headers = {"Content-Type": "application/json"}) {
     let message = pElement.querySelector('.alert.alert-danger');
 
     fetch(uri, {
         method: 'post',
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: headers,
         body: JSON.stringify(localData)
     })
+    .then(function(response) {return checkToken(response)})
     .then(function(response) {
         return response.json()
     })
@@ -54,9 +70,10 @@ function submitData(pElement, uri, localData, addLocal) {
     });
 }
 
-function deleteItem(uri, id, localItem) {
+function deleteItem(uri, id, localItem, headers = {}) {
     if (confirm('Deseja realmente excluir?')) {
-        fetch(uri+'/'+id, {method: 'delete'})
+        fetch(uri+'/'+id, {method: 'delete', headers: headers})
+        .then(function(response) {return checkToken(response)})
         .then(function(response) {
             return response.json()
         })

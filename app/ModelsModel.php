@@ -5,8 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-use App\GenericModel;
-
 class ModelsModel extends Model {
 
     public static function selectModels($collectionID) {
@@ -22,7 +20,8 @@ class ModelsModel extends Model {
             }
 
             for ($i=0; $i < sizeof($models); $i++) { 
-                $models[$i]->finalized = 10;
+                $models[$i]->finalized = 0;
+                // Implementar a contagem.
             }
 
             return [true, [

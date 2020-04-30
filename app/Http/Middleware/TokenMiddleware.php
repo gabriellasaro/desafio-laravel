@@ -22,7 +22,13 @@ class TokenMiddleware {
 
         $response = $next($request);
 
-        $response->headers->set('Meu-Token', SessionsController::newToken($request->headers->get('Meu-Token')));
+        if (rand(1, 10) == 3) {
+            $token = SessionsController::newToken($request->headers->get('Meu-Token'));
+        } else {
+            $token = $request->headers->get('Meu-Token');
+        }
+
+        $response->headers->set('Meu-Token', $token);
         
         return $response;
     }

@@ -107,15 +107,42 @@
     color:#fff;
   }
   </style>
-  <script src="/static/js/sign-in/jquery-1.2.6.pack.js" type="text/javascript"></script>
-  <script src="/static/js/sign-in/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
-  <script src="/static/js/sign-in/signin.js"></script>
+  <script src="/static/js/dashboard/sign-in/jquery-1.2.6.pack.js" type="text/javascript"></script>
+  <script src="/static/js/dashboard/sign-in/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
+  <script src="/static/js/dashboard/sign-in/signin.js"></script>
   <script type="text/javascript">
-  if (localStorage.getItem('token')) {
+  function showSuccess(data) {
     document.querySelector('.success').style.display = 'block';
     window.setTimeout(function(){
       window.location.href = "http://127.0.0.1/dashboard";
     },300);
+  }
+
+  if (localStorage.getItem('token')) {
+    fetch('http://127.0.0.1/api/v1/sessions/check', {method: 'get', headers: {'Meu-Token': localStorage.getItem('token')}})
+    .then(function(response) {
+      if (response.status != 401) {
+        if (response.headers.get('Meu-Token') != null) {
+            localStorage.setItem('token', response.headers.get('Meu-Token'))
+        }
+      } else {
+        localStorage.clear();
+      }
+      return response
+    })
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        if (!data.status) {
+            console.log(data);
+        } else {
+            showSuccess()
+        }
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
   }
 
   $(document).ready(function(){	

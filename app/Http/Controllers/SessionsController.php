@@ -30,7 +30,11 @@ class SessionsController extends Controller {
         }
         return $token;
     }
-
+    
+    public function check() {
+        return RespController::affected(1);
+    }
+    
     public function create(Request $request) {
         $validator = Validator::make($request->all(), [
             'cnpj' => 'required|cnpj',

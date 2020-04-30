@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\GenericModel;
+use App\CollectionsModel;
 use App\Http\Controllers\RespController;
 
 class CollectionsController extends Controller {
@@ -20,6 +21,10 @@ class CollectionsController extends Controller {
 
     public function getAll() {
         return RespController::returnData(GenericModel::selectAll('collection'));
+    }
+
+    public function production() {
+        return RespController::returnData(CollectionsModel::selectProduction());
     }
 
     public function create(Request $request) {

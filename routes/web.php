@@ -29,6 +29,14 @@ Route::get('/admin/task/{id}', function() {
     return view('admin/task-pt-BR');
 });
 
+Route::get('/dashboard', function() {
+    return view('dashboard/home-pt-BR');
+});
+
 Route::get('/dashboard/login', function() {
-    return view('dashboard/sign-in/pt-BR');
+    return view('dashboard/signin-pt-BR');
+});
+
+Route::get('/dashboard/logout', function() {
+    return view('dashboard/logout-pt-BR');
 });

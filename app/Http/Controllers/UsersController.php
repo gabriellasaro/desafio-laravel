@@ -7,12 +7,22 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
 use App\GenericModel;
+use App\TasksModel;
+use App\ProcessesModel;
 use App\Http\Controllers\RespController;
 
 class UsersController extends Controller {
 
     public function getAll() {
         return RespController::returnData(GenericModel::selectAll('user', ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
+    }
+
+    public function getTask($userID) {
+        return RespController::returnData(TasksModel::selectUserTask($userID));
+    }
+
+    public function getProcesses($userID, $collectionID) {
+        return RespController::returnData(ProcessesModel::getUserProcessesFromCollection($userID, $collectionID));
     }
 
     public function getUser($userID) {

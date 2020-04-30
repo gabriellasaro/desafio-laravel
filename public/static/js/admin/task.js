@@ -14,11 +14,11 @@ function addTask(data) {
     tr.appendChild(descrition)
 
     let average = document.createElement('td');
-    average.innerText = data.average_time;
+    average.innerText = data.average_time + " minutos";
     tr.appendChild(average)
 
     let cost = document.createElement('td');
-    cost.innerHTML = data.cost;
+    cost.innerHTML = "R$ " + data.cost;
     tr.appendChild(cost)
 
     table.appendChild(tr)

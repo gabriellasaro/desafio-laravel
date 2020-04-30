@@ -28,4 +28,19 @@ class TasksModel extends Model {
         return [true, []];
     }
 
+    public static function selectUserTask($userID) {
+        $user = GenericModel::selectEqualCondition('user', $userID, 'task_id');
+
+        if (!$user[0]) {
+            return [false];
+        } elseif(sizeof($user[1])!=0) {
+            try {
+                return GenericModel::selectEqualCondition('task', $user[1][0]->task_id, ['name', 'description', 'average_time', 'cost']);
+            } catch(\Illuminate\Database\QueryException $ex) {
+                return [false];
+            }
+        }
+        return [true, []];
+    }
+
 }

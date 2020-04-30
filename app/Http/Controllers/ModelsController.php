@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\ModelsModel;
 use App\GenericModel;
+use App\ProcessesModel;
 use App\Http\Controllers\RespController;
 
 class ModelsController extends Controller {
@@ -27,9 +28,16 @@ class ModelsController extends Controller {
         if ($validator->fails()) {return RespController::valFails();}
 
         $data = $request->all();
-        $data['collection_id'] = $collectionID;;
+        $data['collection_id'] = $collectionID;
 
-        return RespController::returnId(GenericModel::create('model', $data));
+        $result = GenericModel::create('model', $data);
+
+        // Implementar como event.
+        if ($result > 0) {
+            ProcessesModel::createProcesses($result);
+        }
+
+        return RespController::returnId($result);
     }
 
     public function update(Request $request, $modelID) {

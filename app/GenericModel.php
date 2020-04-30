@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class GenericModel extends Model {
 
-    public static function selectEqualCondition($table, $id, $select = '*', $where = 'id') {
+    public static function selectEqualCondition($table, $id, $select = '*', $where = 'id', $condition = '=') {
         try {
-            return [true, DB::table($table)->select($select)->where($where, $id)->get()];
+            return [true, DB::table($table)->select($select)->where($where, $condition, $id)->get()];
         } catch(\Illuminate\Database\QueryException $ex) {
             return [false];
         }
@@ -47,4 +47,12 @@ class GenericModel extends Model {
         }
     }
 
+    public static function selectMin($table, $where = 'id') {
+        try {
+            return [true, DB::table($table)->min($where)];
+        } catch(\Illuminate\Database\QueryException $ex) {
+            return [false];
+        }
+    }
+    
 }

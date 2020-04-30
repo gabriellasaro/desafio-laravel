@@ -10,14 +10,14 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Laravel</a>
+  <a class="navbar-brand" href="/">Laravel</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/admin">Admin <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/admin">Área do Admin <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
@@ -85,7 +85,7 @@
         <input type="text" class="form-control" maxlength="250" id="inputTDescription" placeholder="Descrição da tarefa..." required>
       </div>
       <div class="form-group col-md-6">
-        <label for="inputTAverage">Tempo médio por peça</label>
+        <label for="inputTAverage">Tempo médio em minutos</label>
         <input type="number" class="form-control" id="inputTAverage" placeholder="Tempo médio por peça" required>
       </div>
     </div>
@@ -100,7 +100,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Descrição</th>
         <th scope="col">Tempo médio</th>
-        <th scope="col">Custo (R$)</th>
+        <th scope="col">Custo</th>
         <th scope="col">Ações</th>
       </tr>
     </thead>
@@ -125,7 +125,12 @@
     </tbody>
   </table>
 </div>
-<script src="/static/js/admin/generic.js"></script>
+<script src="/static/js/generic.js"></script>
 <script src="/static/js/admin/home.js"></script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>

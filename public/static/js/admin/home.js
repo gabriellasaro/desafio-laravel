@@ -60,11 +60,11 @@ function addItemsTTask(data) {
         tr.appendChild(descrition)
 
         let average = document.createElement('td');
-        average.innerText = data[i].average_time;
+        average.innerText = data[i].average_time + " minutos";
         tr.appendChild(average)
 
         let cost = document.createElement('td');
-        cost.innerHTML = data[i].cost;
+        cost.innerHTML = "R$ " + data[i].cost;
         tr.appendChild(cost)
 
         let actions = document.createElement('td');
