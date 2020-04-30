@@ -1,5 +1,7 @@
 # desafio-laravel
 
+### Arquivo sql e screenshots na pasta data.
+
 ### Dependência
 - composer require geekcom/validator-docs
 
