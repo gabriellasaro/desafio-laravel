@@ -14,7 +14,7 @@ class TasksModel extends Model {
             return [false];
         } elseif(sizeof($task[1])!=0) {
             try {
-                $users = DB::table('user')->where('task_id', $taskID)->get();
+                $users = DB::table('user')->select(['name', 'company', 'cnpj', 'address', 'phone', 'responsible'])->where('task_id', $taskID)->get();
             } catch(\Illuminate\Database\QueryException $ex) {
                 return [false];
             }

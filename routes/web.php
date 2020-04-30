@@ -17,6 +17,18 @@ Route::get('/', function() {
     return view('welcome');
 });
 
+Route::get('/admin', function() {
+    return view('admin/home-pt-BR');
+});
+
+Route::get('/admin/collection/{id}', function() {
+    return view('admin/collection-pt-BR');
+});
+
+Route::get('/admin/task/{id}', function() {
+    return view('admin/task-pt-BR');
+});
+
 Route::get('/dashboard/login', function() {
-    return view('sign-in/pt-BR');
+    return view('dashboard/sign-in/pt-BR');
 });

@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 // Usuários/Facção
 
+Route::middleware('api')->get('/users', 'UsersController@getAll');
+
 Route::middleware('api')->get('/users/{id}', 'UsersController@getUser')->where('id', '[0-9]+');
 
 Route::middleware('api')->post('/users', 'UsersController@create');

@@ -11,8 +11,12 @@ use App\Http\Controllers\RespController;
 
 class UsersController extends Controller {
 
+    public function getAll() {
+        return RespController::returnData(GenericModel::selectAll('user', ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
+    }
+
     public function getUser($userID) {
-        return RespController::returnData(GenericModel::selectEqualCondition('user', $userID, ['name', 'company', 'cnpj', 'phone', 'responsible', 'task_id']));
+        return RespController::returnData(GenericModel::selectEqualCondition('user', $userID, ['name', 'company', 'cnpj', 'address', 'phone', 'responsible', 'register', 'task_id']));
     }
 
     public function create(Request $request) {

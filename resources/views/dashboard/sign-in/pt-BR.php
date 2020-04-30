@@ -6,7 +6,7 @@
 <meta name="generator" content="Jekyll v3.8.6">
 <title>Entrar - Área do usuário</title>
 <!-- Bootstrap core CSS -->
-<link href="/static/css/sign-in/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
 <!-- Favicons -->
 <link rel="apple-touch-icon" href="/static/img/sign-in/apple-touch-icon.png" sizes="180x180">
 <link rel="icon" href="/static/img/sign-in/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -33,7 +33,7 @@
   }
 </style>
 <!-- Custom styles for this template -->
-<link href="/static/css/sign-in/signin.css" rel="stylesheet">
+<link href="/static/css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
   <form class="form-signin">
@@ -111,12 +111,19 @@
   <script src="/static/js/sign-in/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
   <script src="/static/js/sign-in/signin.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){	
-      $("#inputCNPJ").mask("99.999.999/9999-99");
-    });
+  if (localStorage.getItem('token')) {
+    document.querySelector('.success').style.display = 'block';
+    window.setTimeout(function(){
+      window.location.href = "http://127.0.0.1/dashboard";
+    },300);
+  }
 
-    $(document).ready(function(){	
-      $("#inputPhone").mask("(99) 9999-99999");
-    });
+  $(document).ready(function(){	
+    $("#inputCNPJ").mask("99.999.999/9999-99");
+  });
+
+  $(document).ready(function(){	
+    $("#inputPhone").mask("(99) 9999-99999");
+  });
   </script>
 </body></html>

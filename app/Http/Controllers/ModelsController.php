@@ -19,7 +19,7 @@ class ModelsController extends Controller {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:3|max:250',
             'description' => 'required|string|min:3|max:250',
-            'quant' => 'required|integer|min:1|max:999999',
+            'quant' => 'required|integer|min:1|max:999999999',
             'img' => 'required|string|max:1000',
             'code' => 'required|string|min:6|max:6|unique:model'
         ]);

@@ -39,6 +39,7 @@ class CollectionsController extends Controller {
     }
 
     public function delete($collectionID) {
+        GenericModel::remove('model', $collectionID, 'collection_id');
         return RespController::affected(GenericModel::remove('collection', $collectionID));
     }
 }

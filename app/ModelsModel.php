@@ -21,6 +21,10 @@ class ModelsModel extends Model {
                 return [false];
             }
 
+            for ($i=0; $i < sizeof($models); $i++) { 
+                $models[$i]->finalized = 10;
+            }
+
             return [true, [
                 'collection' => $collection[1][0],
                 'models' => $models

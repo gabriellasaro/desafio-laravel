@@ -39,9 +39,9 @@ class GenericModel extends Model {
         }
     }
 
-    public static function remove($table, $id) {
+    public static function remove($table, $id, $where = 'id') {
         try {
-            return DB::table($table)->where('id', $id)->delete();
+            return DB::table($table)->where($where, $id)->delete();
         } catch(\Illuminate\Database\QueryException $ex) {
             return -1;
         }
